@@ -1,0 +1,5 @@
+jivo_connector
+
+Parts of the native Android and iOS code are adapted from jvsdk_plugin 1.2.0
+by Jivo (https://pub.dev/packages/jvsdk_plugin), licensed under the Apache
+License, Version 2.0 (see LICENSE). The adapted code has been modified.

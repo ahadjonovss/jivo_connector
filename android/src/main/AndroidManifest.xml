@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- Starts the SDK with the app, before any Flutter code runs. -->
+        <provider
+            android:name="uz.alif.jivo_connector.JivoInitializer"
+            android:authorities="${applicationId}.jivo_connector.init"
+            android:exported="false" />
+    </application>
+
+</manifest>
