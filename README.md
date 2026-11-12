@@ -16,15 +16,33 @@ Then wire it into the app as described in
 ## Usage
 
 ```dart
-final jivo = JivoConnector();
+// Once, at start: the widget_id of a "Mobile SDK" channel in Jivo.
+Jivo.setup(channelId: 'widget_id');
 
-await jivo.setup(channelId: widgetId, userToken: jwtFromBackend);
-await jivo.setContactInfo(name: name, phone: phone);
-await jivo.open();
+// On the chat button.
+await Jivo.open(
+  user: JivoUser(
+    token: jwtFromBackend, // optional, keeps the history across devices
+    name: 'Ali',
+    phone: '+92...',
+    fields: [JivoCustomField(title: 'Merchant ID', content: '123')],
+  ),
+);
 
-jivo.hasUnread.listen((hasUnread) { /* badge */ });
+// On logout.
+await Jivo.logout();
+```
 
-await jivo.clear(); // on logout
+`user` is optional: without it the chat opens for an anonymous client.
+
+The unread flag and Jivo's pushes need a session before the chat is first
+opened. If they matter, start it on login instead of on `open`:
+
+```dart
+await Jivo.setUser(JivoUser(token: jwtFromBackend, name: 'Ali'));
+Jivo.hasUnread.listen((hasUnread) { /* badge */ });
+
+await Jivo.open(); // later, with no user
 ```
 
 ## Wiring it into an app
@@ -42,13 +60,13 @@ await jivo.clear(); // on logout
   the foreground and in the background handler:
 
   ```dart
-  if (JivoConnector.isJivoPush(message.data)) {
-    await jivo.handlePush(message.data); // the SDK draws it
+  if (Jivo.isJivoPush(message.data)) {
+    await Jivo.handlePush(message.data); // the SDK draws it
     return;
   }
   ```
 
-  and the FCM token goes to `jivo.setPushToken(token)` on start and on
+  and the FCM token goes to `Jivo.setPushToken(token)` on start and on
   `onTokenRefresh`.
 
 **iOS**

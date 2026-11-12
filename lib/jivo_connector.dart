@@ -5,5 +5,6 @@
 /// starts the session, opens the screen and hands pushes over.
 library;
 
-export 'package:jivo_connector/src/jivo_connector.dart';
+export 'package:jivo_connector/src/jivo.dart';
 export 'package:jivo_connector/src/jivo_custom_field.dart';
+export 'package:jivo_connector/src/jivo_user.dart';
