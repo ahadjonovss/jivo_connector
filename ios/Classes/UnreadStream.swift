@@ -1,8 +1,8 @@
 import Flutter
 import JivoSDK
 
-/// Feeds `unreadCount` and `hasUnread` on the Dart side with the SDK's count
-/// of unread messages. The SDK keeps a single counter callback, so a new
+/// Feeds `hasUnread` on the Dart side. The SDK calls it a counter, but it
+/// only ever reports 1 or 0. It keeps a single counter callback, so a new
 /// listener simply replaces the old one.
 final class UnreadStream: NSObject, FlutterStreamHandler {
     private var sink: FlutterEventSink?

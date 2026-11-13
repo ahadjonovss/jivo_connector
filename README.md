@@ -51,11 +51,13 @@ opened. If they matter, start it on login instead of on `open`:
 
 ```dart
 await Jivo.setUser(JivoUser(token: jwtFromBackend, name: 'Ali'));
-Jivo.hasUnread.listen((hasUnread) { /* a dot on the chat button */ });
 
-// The number itself, where the SDK gives one (iOS; Android only knows
-// whether there is anything unread).
-if (Jivo.countsUnread) Jivo.unreadCount.listen((count) { /* a badge */ });
+// A dot on the chat button. A flag, not a count: neither SDK gives a number.
+// It holds the last value, so a button built later shows it at once.
+ValueListenableBuilder(
+  valueListenable: Jivo.hasUnread,
+  builder: (context, hasUnread, _) => ChatButton(hasDot: hasUnread),
+);
 
 await Jivo.open(); // later, with no user
 ```

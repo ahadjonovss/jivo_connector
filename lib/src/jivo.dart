@@ -28,27 +28,21 @@ abstract final class Jivo {
   /// Whether the native SDK has a session to open the chat in.
   static bool _hasSession = false;
 
-  /// How many messages the client has not read yet.
+  /// Whether the client has messages they have not read yet.
   ///
-  /// The exact number on iOS only. The Android SDK reports just whether there
-  /// is anything unread, which comes through as 1 or 0; [countsUnread] tells
-  /// the two apart. Comes alive once there is a session, after [setUser] or
-  /// [open].
-  static final Stream<int> unreadCount = _unread.receiveBroadcastStream().map(
-    (value) => switch (value) {
-      final int count => count,
-      true => 1,
-      _ => 0,
-    },
-  );
+  /// A flag rather than a count on both platforms: the Android SDK reports
+  /// only whether there is anything unread, and the iOS one, despite its
+  /// counter, only ever reports 1 or 0.
+  ///
+  /// Holds the last value the SDK reported, so a widget built later — a chat
+  /// button on a screen pushed after the message came — shows it at once
+  /// rather than waiting for the next change. Listens from [setup] on; comes
+  /// alive once there is a session, after [setUser] or [open].
+  static ValueListenable<bool> get hasUnread => _hasUnread;
 
-  /// Whether the client has messages they have not read yet, on both
-  /// platforms.
-  static final Stream<bool> hasUnread = unreadCount.map((count) => count > 0);
+  static final _hasUnread = ValueNotifier(false);
 
-  /// Whether [unreadCount] is a real count (iOS) rather than a flag (Android),
-  /// so the app knows whether to show a number or only a dot.
-  static bool get countsUnread => defaultTargetPlatform == TargetPlatform.iOS;
+  static StreamSubscription<Object?>? _unreadEvents;
 
   /// Remembers the channel the chat is in: Jivo's `widget_id` of a
   /// "Mobile SDK" channel. Call once, before anything else.
@@ -63,6 +57,15 @@ abstract final class Jivo {
   }) {
     _channelId = channelId;
     _hasSession = false;
+    // For the app's lifetime: the SDKs report a change, never the state, so
+    // a moment with nobody listening would lose it.
+    _unreadEvents ??= _unread.receiveBroadcastStream().listen(
+      (value) => _hasUnread.value = switch (value) {
+        final bool hasUnread => hasUnread,
+        final int count => count > 0,
+        _ => false,
+      },
+    );
     unawaited(setTheme(theme));
     if (appearance != null) unawaited(setAppearance(appearance));
   }
@@ -123,6 +126,7 @@ abstract final class Jivo {
   static Future<void> logout() async {
     await _methods.invokeMethod('clear');
     _hasSession = false;
+    _hasUnread.value = false;
   }
 
   /// Hands the device's FCM token to Jivo.

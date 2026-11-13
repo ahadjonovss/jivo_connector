@@ -1,3 +1,12 @@
+## 0.6.0
+
+* **Breaking:** `Jivo.hasUnread` is a `ValueListenable<bool>` holding the last
+  value the SDK reported, so a widget built after the message came shows it at
+  once. Before, a new listener of the stream saw nothing until the next change.
+* **Breaking:** `Jivo.unreadCount` and `Jivo.countsUnread` are gone. The iOS
+  SDK, too, only ever reports 1 or 0, so there was no count to show.
+* `logout` clears the flag.
+
 ## 0.5.1
 
 * README: an app needs data binding on, or its release build stops at R8
