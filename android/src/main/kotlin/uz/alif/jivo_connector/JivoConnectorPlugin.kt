@@ -110,6 +110,8 @@ class JivoConnectorPlugin : FlutterPlugin, ActivityAware, MethodChannel.MethodCa
 
             "setAppearance" -> {
                 Jivo.setConfig(appearanceConfig(call))
+                ChatTitle.text = call.argument<String>("title")
+                    .takeIf { call.argument<Boolean>("showOperatorInTitle") == false }
                 result.success(null)
             }
 

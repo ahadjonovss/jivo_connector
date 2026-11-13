@@ -25,6 +25,7 @@ class JivoAppearance {
     this.notificationColor,
     this.notificationSound,
     this.showBotLabel,
+    this.showOperatorInTitle = true,
   });
 
   /// The first line of the chat screen's header.
@@ -78,6 +79,14 @@ class JivoAppearance {
   /// Whether replies from Jivo's bot carry a "bot" label. Android only.
   final bool? showBotLabel;
 
+  /// Whether the header's first line turns into the operator's name once one
+  /// joins, which both SDKs do and neither lets you switch off. `false` keeps
+  /// [title] there for good; it needs [title] to keep.
+  ///
+  /// Done around the SDKs rather than through them: the plugin watches the
+  /// header and puts the title back whenever the SDK changes it.
+  final bool showOperatorInTitle;
+
   Map<String, Object?> toMap() => {
     'title': title,
     'subtitle': subtitle,
@@ -94,5 +103,6 @@ class JivoAppearance {
     'notificationColor': notificationColor,
     'notificationSound': notificationSound,
     'showBotLabel': showBotLabel,
+    'showOperatorInTitle': showOperatorInTitle,
   };
 }

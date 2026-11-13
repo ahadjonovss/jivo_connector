@@ -24,6 +24,7 @@ Jivo.setup(
   theme: JivoTheme.light,
   appearance: const JivoAppearance(
     title: 'Support',
+    showOperatorInTitle: false, // keeps 'Support' after an operator joins
     welcomeMessage: 'Hi! How can we help?',
     accentColor: Color(0xFF39B980), // iOS
     notificationIcon: 'ic_notification', // Android drawable

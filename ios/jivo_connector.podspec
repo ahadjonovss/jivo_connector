@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'jivo_connector'
-  s.version          = '0.6.0'
+  s.version          = '0.7.0'
   s.summary          = 'Jivo support chat for Flutter apps.'
   s.description      = 'A bridge to the native Jivo Mobile SDK.'
   s.homepage         = 'https://github.com/ahadjonovss/jivo_connector'

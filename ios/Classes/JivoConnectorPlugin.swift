@@ -24,6 +24,7 @@ public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
         FlutterEventChannel(name: "jivo_connector/unread", binaryMessenger: registrar.messenger())
             .setStreamHandler(UnreadStream())
         registrar.addApplicationDelegate(plugin)
+        PinnedTitle.shared.install()
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -109,6 +110,9 @@ public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
         display.define(color: color(args["subtitleColor"]), forElement: .headerSubtitle)
         display.define(color: color(args["accentColor"]), forElement: .outgoingElements)
         display.define(image: image(args["headerIcon"]), forElement: .headerIcon)
+        PinnedTitle.shared.text = (args["showOperatorInTitle"] as? Bool) == false
+            ? args["title"] as? String
+            : nil
         // Dart sends a BCP 47 tag, `en-US`; Foundation's identifiers use `_`.
         let locale = (args["locale"] as? String)
             .map { Locale(identifier: $0.replacingOccurrences(of: "-", with: "_")) }

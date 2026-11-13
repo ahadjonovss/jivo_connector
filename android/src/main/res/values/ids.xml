@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Marks the chat toolbar `ChatTitle` already keeps the title on. -->
+    <item name="jivo_connector_title_kept" type="id" />
+</resources>

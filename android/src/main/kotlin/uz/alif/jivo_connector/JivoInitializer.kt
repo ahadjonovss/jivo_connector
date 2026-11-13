@@ -23,8 +23,10 @@ class JivoInitializer : ContentProvider() {
     override fun onCreate(): Boolean {
         val context = context ?: return false
         Jivo.init(context.applicationContext)
-        (context.applicationContext as? Application)
-            ?.registerActivityLifecycleCallbacks(ChatTheme)
+        (context.applicationContext as? Application)?.run {
+            registerActivityLifecycleCallbacks(ChatTheme)
+            registerActivityLifecycleCallbacks(ChatTitle)
+        }
         return true
     }
 

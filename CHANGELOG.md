@@ -1,3 +1,11 @@
+## 0.7.0
+
+* `JivoAppearance.showOperatorInTitle`: `false` keeps `title` in the chat
+  header for good. Both SDKs replace it with the operator's name once one
+  joins and neither can be told not to, so the plugin watches the header and
+  puts the title back. On iOS the plugin now takes the header over from the
+  SDK for this, and sets it up as the same opaque bar the SDK would.
+
 ## 0.6.0
 
 * **Breaking:** `Jivo.hasUnread` is a `ValueListenable<bool>` holding the last

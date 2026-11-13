@@ -2,7 +2,7 @@ name: jivo_connector
 description: >-
   Jivo support chat for Flutter apps: a thin bridge to the native Jivo Mobile
   SDK on Android and iOS, with pushes routed through your own Firebase setup.
-version: 0.6.0
+version: 0.7.0
 homepage: https://github.com/ahadjonovss/jivo_connector
 repository: https://github.com/ahadjonovss/jivo_connector
 issue_tracker: https://github.com/ahadjonovss/jivo_connector/issues
