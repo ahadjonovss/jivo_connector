@@ -7,7 +7,8 @@ import com.jivosite.sdk.model.repository.history.NewMessageListener
 import io.flutter.plugin.common.EventChannel
 
 /**
- * Feeds `hasUnread` on the Dart side.
+ * Feeds `hasUnread` on the Dart side. A flag rather than a count, which is
+ * all the SDK reports on Android.
  *
  * The SDK keeps its listeners as weak references and offers no way to remove
  * one, so the listener lives exactly as long as this object holds it: dropping

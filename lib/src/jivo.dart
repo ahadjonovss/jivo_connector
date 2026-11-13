@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:jivo_connector/src/jivo_appearance.dart';
 import 'package:jivo_connector/src/jivo_theme.dart';
@@ -27,14 +28,27 @@ abstract final class Jivo {
   /// Whether the native SDK has a session to open the chat in.
   static bool _hasSession = false;
 
-  /// Whether the client has messages they have not read yet.
+  /// How many messages the client has not read yet.
   ///
-  /// A flag and not a count: the Android SDK only reports whether there is
-  /// anything unread, so iOS, which does count, is reduced to the same.
-  /// Comes alive once there is a session, after [setUser] or [open].
-  static final Stream<bool> hasUnread = _unread.receiveBroadcastStream().map(
-    (value) => value as bool,
+  /// The exact number on iOS only. The Android SDK reports just whether there
+  /// is anything unread, which comes through as 1 or 0; [countsUnread] tells
+  /// the two apart. Comes alive once there is a session, after [setUser] or
+  /// [open].
+  static final Stream<int> unreadCount = _unread.receiveBroadcastStream().map(
+    (value) => switch (value) {
+      final int count => count,
+      true => 1,
+      _ => 0,
+    },
   );
+
+  /// Whether the client has messages they have not read yet, on both
+  /// platforms.
+  static final Stream<bool> hasUnread = unreadCount.map((count) => count > 0);
+
+  /// Whether [unreadCount] is a real count (iOS) rather than a flag (Android),
+  /// so the app knows whether to show a number or only a dot.
+  static bool get countsUnread => defaultTargetPlatform == TargetPlatform.iOS;
 
   /// Remembers the channel the chat is in: Jivo's `widget_id` of a
   /// "Mobile SDK" channel. Call once, before anything else.

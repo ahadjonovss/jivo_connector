@@ -51,7 +51,11 @@ opened. If they matter, start it on login instead of on `open`:
 
 ```dart
 await Jivo.setUser(JivoUser(token: jwtFromBackend, name: 'Ali'));
-Jivo.hasUnread.listen((hasUnread) { /* badge */ });
+Jivo.hasUnread.listen((hasUnread) { /* a dot on the chat button */ });
+
+// The number itself, where the SDK gives one (iOS; Android only knows
+// whether there is anything unread).
+if (Jivo.countsUnread) Jivo.unreadCount.listen((count) { /* a badge */ });
 
 await Jivo.open(); // later, with no user
 ```

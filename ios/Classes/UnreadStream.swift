@@ -1,11 +1,9 @@
 import Flutter
 import JivoSDK
 
-/// Feeds `hasUnread` on the Dart side.
-///
-/// The SDK counts unread messages, but Android can only say whether there are
-/// any, so the count is reduced to that flag here too. The SDK keeps a single
-/// counter callback, so a new listener simply replaces the old one.
+/// Feeds `unreadCount` and `hasUnread` on the Dart side with the SDK's count
+/// of unread messages. The SDK keeps a single counter callback, so a new
+/// listener simply replaces the old one.
 final class UnreadStream: NSObject, FlutterStreamHandler {
     private var sink: FlutterEventSink?
 
@@ -13,7 +11,7 @@ final class UnreadStream: NSObject, FlutterStreamHandler {
         sink = events
         Jivo.session.listenToUnreadCounter { [weak self] number in
             DispatchQueue.main.async {
-                self?.sink?(number > 0)
+                self?.sink?(number)
             }
         }
         return nil

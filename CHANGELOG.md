@@ -1,3 +1,9 @@
+## 0.5.0
+
+* `Jivo.unreadCount`: the number of unread messages, exact on iOS. The Android
+  SDK only knows whether there are any, so there it is 1 or 0;
+  `Jivo.countsUnread` says which of the two the platform gives.
+
 ## 0.4.0
 
 * `JivoAppearance`, passed to `Jivo.setup(appearance:)` or later to
