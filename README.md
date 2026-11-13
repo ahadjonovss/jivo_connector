@@ -64,6 +64,17 @@ await Jivo.open(); // later, with no user
 
 **Android**
 
+- Data binding on in the app module (`android/app/build.gradle.kts`):
+
+  ```kotlin
+  android {
+      buildFeatures { dataBinding = true }
+  }
+  ```
+
+  The SDK's screens use it, and a library's binding classes are generated in
+  the app. A debug build works without it; a release build stops at R8 on a
+  missing `com.jivosite.sdk.BR`.
 - `jitpack.io` in the app's repositories (`android/settings.gradle.kts` /
   `build.gradle.kts`): one of the SDK's dependencies lives only there.
 - The SDK declares `com.google.firebase.messaging.default_notification_icon`

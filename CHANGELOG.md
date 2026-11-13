@@ -1,3 +1,8 @@
+## 0.5.1
+
+* README: an app needs data binding on, or its release build stops at R8
+  on a missing `com.jivosite.sdk.BR`.
+
 ## 0.5.0
 
 * `Jivo.unreadCount`: the number of unread messages, exact on iOS. The Android
