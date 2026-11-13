@@ -1,12 +1,15 @@
 package uz.alif.jivo_connector
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import com.jivosite.sdk.Jivo
 import com.jivosite.sdk.model.pojo.CustomData
 import com.jivosite.sdk.push.JivoPushProvider
+import com.jivosite.sdk.support.builders.Config
 import com.jivosite.sdk.support.builders.ContactInfo
 import com.jivosite.sdk.ui.chat.JivoChatActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -105,6 +108,11 @@ class JivoConnectorPlugin : FlutterPlugin, ActivityAware, MethodChannel.MethodCa
                 result.success(null)
             }
 
+            "setAppearance" -> {
+                Jivo.setConfig(appearanceConfig(call))
+                result.success(null)
+            }
+
             "open" -> {
                 open()
                 result.success(null)
@@ -131,6 +139,39 @@ class JivoConnectorPlugin : FlutterPlugin, ActivityAware, MethodChannel.MethodCa
             else -> result.notImplemented()
         }
     }
+
+    /**
+     * A whole new config, so a field left out goes back to the SDK's own.
+     * The iOS-only fields are not read here; resources that are not found are
+     * left out rather than failing the call.
+     */
+    private fun appearanceConfig(call: MethodCall): Config {
+        val builder = Config.Builder()
+        call.argument<String>("title")?.let(builder::setTitleString)
+        call.argument<String>("subtitle")?.let(builder::setSubtitleString)
+        call.argument<String>("welcomeMessage")?.let(builder::setWelcomeMessageString)
+        call.argument<String>("offlineMessage")?.let(builder::setOfflineMessageString)
+        call.argument<String>("notificationTitle")?.let(builder::setNotificationTitleString)
+        call.argument<String>("notificationIcon")
+            ?.let { resource(it, "drawable") ?: resource(it, "mipmap") }
+            ?.let(builder::setNotificationSmallIcon)
+        call.argument<String>("notificationColor")
+            ?.let { resource(it, "color") }
+            ?.let(builder::setNotificationColorIcon)
+        call.argument<String>("notificationSound")
+            ?.let { name -> resource(name, "raw")?.let { name } }
+            ?.let {
+                builder.setUriNotificationSound(
+                    Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/raw/$it"),
+                )
+            }
+        if (call.argument<Boolean>("showBotLabel") == false) builder.hideBotLabel()
+        return builder.build()
+    }
+
+    /** The id of the app's resource [name] of [type], or `null`. */
+    private fun resource(name: String, type: String): Int? =
+        context.resources.getIdentifier(name, type, context.packageName).takeIf { it != 0 }
 
     /**
      * The SDK's own chat activity, started from the app's activity when there

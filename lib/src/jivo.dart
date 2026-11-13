@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:jivo_connector/src/jivo_appearance.dart';
 import 'package:jivo_connector/src/jivo_theme.dart';
 import 'package:jivo_connector/src/jivo_user.dart';
 
@@ -14,8 +15,9 @@ import 'package:jivo_connector/src/jivo_user.dart';
 /// await Jivo.open(user: JivoUser(token: jwt, name: 'Ali'));
 /// ```
 ///
-/// Both platforms get the same set of calls on purpose: whatever only one SDK
-/// can do is left out rather than silently ignored on the other.
+/// Both platforms get the same set of calls. Where the SDKs differ, as in
+/// what [JivoAppearance] can set, the docs say which platform a setting is
+/// for; on the other it does nothing.
 abstract final class Jivo {
   static const _methods = MethodChannel('jivo_connector');
   static const _unread = EventChannel('jivo_connector/unread');
@@ -39,14 +41,29 @@ abstract final class Jivo {
   ///
   /// [theme] is the look of the chat screen; by default it follows the
   /// device, which is not what an app with a light theme only wants.
+  /// [appearance] sets its texts, colours and notifications.
   static void setup({
     required String channelId,
     JivoTheme theme = JivoTheme.system,
+    JivoAppearance? appearance,
   }) {
     _channelId = channelId;
     _hasSession = false;
-    unawaited(_methods.invokeMethod('setTheme', theme.name));
+    unawaited(setTheme(theme));
+    if (appearance != null) unawaited(setAppearance(appearance));
   }
+
+  /// Changes the look of the chat screen; takes effect the next time it
+  /// opens.
+  static Future<void> setTheme(JivoTheme theme) =>
+      _methods.invokeMethod('setTheme', theme.name);
+
+  /// Replaces the texts, colours and notification settings, say when the
+  /// app's language changes. Takes effect the next time the chat opens.
+  ///
+  /// Replaces, not merges: a field left `null` goes back to the SDK's own.
+  static Future<void> setAppearance(JivoAppearance appearance) =>
+      _methods.invokeMethod('setAppearance', appearance.toMap());
 
   /// Starts a session for [user] without opening the chat.
   ///

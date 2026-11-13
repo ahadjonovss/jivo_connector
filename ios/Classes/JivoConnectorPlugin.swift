@@ -10,8 +10,15 @@ import UserNotifications
 /// push and the pushes themselves reach the SDK here, with no code in the
 /// app's `AppDelegate` beyond what Flutter already forwards to plugins.
 public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
+    /// Resolves the Flutter assets `setAppearance` names.
+    private let registrar: FlutterPluginRegistrar
+
+    private init(registrar: FlutterPluginRegistrar) {
+        self.registrar = registrar
+    }
+
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let plugin = JivoConnectorPlugin()
+        let plugin = JivoConnectorPlugin(registrar: registrar)
         let methods = FlutterMethodChannel(name: "jivo_connector", binaryMessenger: registrar.messenger())
         registrar.addMethodCallDelegate(plugin, channel: methods)
         FlutterEventChannel(name: "jivo_connector/unread", binaryMessenger: registrar.messenger())
@@ -61,6 +68,10 @@ public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
             }
             result(nil)
 
+        case "setAppearance":
+            setAppearance(call.arguments as? [String: Any] ?? [:])
+            result(nil)
+
         case "open":
             if let top = topViewController() {
                 Jivo.display.present(over: top)
@@ -83,6 +94,44 @@ public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
         default:
             result(FlutterMethodNotImplemented)
         }
+    }
+
+    /// Applies every field, `nil` included, so a field left out goes back to
+    /// the SDK's own. The Android-only ones are not read here.
+    private func setAppearance(_ args: [String: Any]) {
+        let display = Jivo.display
+        display.define(text: args["title"] as? String, forElement: .headerTitle)
+        display.define(text: args["subtitle"] as? String, forElement: .headerSubtitle)
+        display.define(text: args["welcomeMessage"] as? String, forElement: .messageWelcome)
+        display.define(text: args["offlineMessage"] as? String, forElement: .messageOffline)
+        display.define(text: args["inputPlaceholder"] as? String, forElement: .replyPlaceholder)
+        display.define(color: color(args["titleColor"]), forElement: .headerTitle)
+        display.define(color: color(args["subtitleColor"]), forElement: .headerSubtitle)
+        display.define(color: color(args["accentColor"]), forElement: .outgoingElements)
+        display.define(image: image(args["headerIcon"]), forElement: .headerIcon)
+        // Dart sends a BCP 47 tag, `en-US`; Foundation's identifiers use `_`.
+        let locale = (args["locale"] as? String)
+            .map { Locale(identifier: $0.replacingOccurrences(of: "-", with: "_")) }
+        display.setLocale(locale)
+    }
+
+    /// A colour Dart sent as a 32-bit ARGB number.
+    private func color(_ value: Any?) -> UIColor? {
+        guard let argb = (value as? NSNumber)?.uint32Value else { return nil }
+        return UIColor(
+            red: CGFloat((argb >> 16) & 0xFF) / 255,
+            green: CGFloat((argb >> 8) & 0xFF) / 255,
+            blue: CGFloat(argb & 0xFF) / 255,
+            alpha: CGFloat((argb >> 24) & 0xFF) / 255
+        )
+    }
+
+    /// An image from the app's Flutter assets, by the path in its pubspec.
+    private func image(_ value: Any?) -> UIImage? {
+        guard let asset = value as? String else { return nil }
+        let key = registrar.lookupKey(forAsset: asset)
+        guard let path = Bundle.main.path(forResource: key, ofType: nil) else { return nil }
+        return UIImage(contentsOfFile: path)
     }
 
     /// The controller on top of everything, so the chat opens over whatever

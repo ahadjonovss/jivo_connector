@@ -17,8 +17,18 @@ Then wire it into the app as described in
 
 ```dart
 // Once, at start: the widget_id of a "Mobile SDK" channel in Jivo.
-// `theme` is optional; by default the chat follows the device's dark mode.
-Jivo.setup(channelId: 'widget_id', theme: JivoTheme.light);
+// `theme` and `appearance` are optional; by default the chat follows the
+// device's dark mode and shows what is set for the channel in Jivo's panel.
+Jivo.setup(
+  channelId: 'widget_id',
+  theme: JivoTheme.light,
+  appearance: const JivoAppearance(
+    title: 'Support',
+    welcomeMessage: 'Hi! How can we help?',
+    accentColor: Color(0xFF39B980), // iOS
+    notificationIcon: 'ic_notification', // Android drawable
+  ),
+);
 
 // On the chat button.
 await Jivo.open(

@@ -1,3 +1,12 @@
+## 0.4.0
+
+* `JivoAppearance`, passed to `Jivo.setup(appearance:)` or later to
+  `Jivo.setAppearance`: the chat's title, subtitle, welcome and offline
+  messages on both platforms; the input hint, colours, header icon and
+  language on iOS; the notification's title, icon, colour, sound and the
+  bot label on Android.
+* `Jivo.setTheme` changes the theme after `setup`.
+
 ## 0.3.0
 
 * `Jivo.setup` takes a `theme`: `JivoTheme.light` or `JivoTheme.dark` keeps
