@@ -1,5 +1,6 @@
 package uz.alif.jivo_connector
 
+import android.app.Application
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
@@ -22,6 +23,8 @@ class JivoInitializer : ContentProvider() {
     override fun onCreate(): Boolean {
         val context = context ?: return false
         Jivo.init(context.applicationContext)
+        (context.applicationContext as? Application)
+            ?.registerActivityLifecycleCallbacks(ChatTheme)
         return true
     }
 

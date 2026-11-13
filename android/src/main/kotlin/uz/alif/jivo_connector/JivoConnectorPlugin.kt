@@ -3,6 +3,7 @@ package uz.alif.jivo_connector
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
 import com.jivosite.sdk.Jivo
 import com.jivosite.sdk.model.pojo.CustomData
 import com.jivosite.sdk.push.JivoPushProvider
@@ -92,6 +93,15 @@ class JivoConnectorPlugin : FlutterPlugin, ActivityAware, MethodChannel.MethodCa
                         )
                     },
                 )
+                result.success(null)
+            }
+
+            "setTheme" -> {
+                ChatTheme.nightMode = when (call.arguments<String>()) {
+                    "light" -> AppCompatDelegate.MODE_NIGHT_NO
+                    "dark" -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                }
                 result.success(null)
             }
 

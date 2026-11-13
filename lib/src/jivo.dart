@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:jivo_connector/src/jivo_theme.dart';
 import 'package:jivo_connector/src/jivo_user.dart';
 
 /// The Jivo chat, as the app sees it.
@@ -34,9 +36,16 @@ abstract final class Jivo {
 
   /// Remembers the channel the chat is in: Jivo's `widget_id` of a
   /// "Mobile SDK" channel. Call once, before anything else.
-  static void setup({required String channelId}) {
+  ///
+  /// [theme] is the look of the chat screen; by default it follows the
+  /// device, which is not what an app with a light theme only wants.
+  static void setup({
+    required String channelId,
+    JivoTheme theme = JivoTheme.system,
+  }) {
     _channelId = channelId;
     _hasSession = false;
+    unawaited(_methods.invokeMethod('setTheme', theme.name));
   }
 
   /// Starts a session for [user] without opening the chat.

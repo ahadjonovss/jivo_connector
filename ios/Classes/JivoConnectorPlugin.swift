@@ -53,6 +53,14 @@ public final class JivoConnectorPlugin: NSObject, FlutterPlugin {
             })
             result(nil)
 
+        case "setTheme":
+            switch call.arguments as? String {
+            case "light": Jivo.display.setTheme(.light)
+            case "dark": Jivo.display.setTheme(.dark)
+            default: Jivo.display.setTheme(.unspecified)
+            }
+            result(nil)
+
         case "open":
             if let top = topViewController() {
                 Jivo.display.present(over: top)

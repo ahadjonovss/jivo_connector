@@ -7,4 +7,5 @@ library;
 
 export 'package:jivo_connector/src/jivo.dart';
 export 'package:jivo_connector/src/jivo_custom_field.dart';
+export 'package:jivo_connector/src/jivo_theme.dart';
 export 'package:jivo_connector/src/jivo_user.dart';

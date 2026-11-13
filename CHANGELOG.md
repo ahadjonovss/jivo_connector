@@ -1,3 +1,9 @@
+## 0.3.0
+
+* `Jivo.setup` takes a `theme`: `JivoTheme.light` or `JivoTheme.dark` keeps
+  the chat screen in that look whatever the device is set to. The default,
+  `JivoTheme.system`, follows the device as before.
+
 ## 0.2.0
 
 * Simpler API, all static on `Jivo`: `setup(channelId:)` once, then
