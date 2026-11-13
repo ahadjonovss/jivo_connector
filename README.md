@@ -100,7 +100,9 @@ await Jivo.open(); // later, with no user
 
 **iOS**
 
-- In `ios/Podfile`, above the targets:
+- Swift Package Manager or CocoaPods. Through SPM the app needs iOS 15 or
+  later, as JivoSDK's own package does, and nothing else.
+- With CocoaPods, in `ios/Podfile`, above the targets:
 
   ```ruby
   source 'https://cdn.cocoapods.org/'

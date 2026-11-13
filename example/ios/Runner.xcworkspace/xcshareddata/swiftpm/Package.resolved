@@ -1,0 +1,239 @@
+{
+  "pins" : [
+    {
+      "identity" : "collectionandtableviewcompatible",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/digital-fireworks/CollectionAndTableViewCompatible.git",
+      "state" : {
+        "revision" : "0e11450e05009d1873318579349594c3fd63475a",
+        "version" : "0.2.6"
+      }
+    },
+    {
+      "identity" : "dtcollectionviewmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DenTelezhkin/DTCollectionViewManager.git",
+      "state" : {
+        "revision" : "6f806eed77450b2bdd95da2ccc088e5dc132b6bc",
+        "version" : "11.0.0"
+      }
+    },
+    {
+      "identity" : "dtmodelstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DenTelezhkin/DTModelStorage",
+      "state" : {
+        "revision" : "1473c7ed4970b9572e93cf0305c80d54855b3cdf",
+        "version" : "11.0.2"
+      }
+    },
+    {
+      "identity" : "gzipswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/GzipSwift.git",
+      "state" : {
+        "revision" : "99d850259eb35c8218a9400ee100a4bdc5289c25",
+        "version" : "6.1.1"
+      }
+    },
+    {
+      "identity" : "jfmarkdownkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JFMarkdownKit.git",
+      "state" : {
+        "revision" : "0f39ab19aa3e966693cab9cde2302075084905b6",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jfwebsocket",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JFWebSocket.git",
+      "state" : {
+        "revision" : "c3aededa497d21513a0c025681bab10ecd9df81d",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "jivosdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JivoSDK-iOS.git",
+      "state" : {
+        "revision" : "65cd5c94094d8193ebda9241d295bfcc494678df",
+        "version" : "5.3.2"
+      }
+    },
+    {
+      "identity" : "jmcodingkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMCodingKit.git",
+      "state" : {
+        "revision" : "71d39daa0c7d8e0e958ac70349e70df3cb536910",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "jmdesignkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMDesignKit.git",
+      "state" : {
+        "revision" : "65f9100084cfef3f52e98794754da86a39a6ef03",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmimageloader",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMImageLoader.git",
+      "state" : {
+        "revision" : "1dd9e404e4f43b7a60f890a9debe23ae38bfba70",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmmarkdownkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMMarkdownKit.git",
+      "state" : {
+        "revision" : "3749fe0acfec52d9f5021a774e02e9406065cf89",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmonetimecalculator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMOnetimeCalculator.git",
+      "state" : {
+        "revision" : "3538531c5f67f408b7a195573fddabae9baa68f4",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmrepickit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMRepicKit.git",
+      "state" : {
+        "revision" : "7a18bed218f1b3454f2caebb2d4232ee5ecc107f",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmscalableview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMScalableView.git",
+      "state" : {
+        "revision" : "cf3c178c1d62418e79d113ada5f5c5e03da94d18",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmsidepanelkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMSidePanelKit.git",
+      "state" : {
+        "revision" : "5882f42e27983e944425c570f87b5616e41fb0ed",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "jmtimelinekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/JMTimelineKit.git",
+      "state" : {
+        "revision" : "8bafb9586f8bef9cb623546ab9c59163594ba946",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "jwtdecode.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/auth0/JWTDecode.swift.git",
+      "state" : {
+        "revision" : "58af7278797871e460d79496621b3e5366b865b2",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift.git",
+      "state" : {
+        "revision" : "5e1b02b6a9dac2a759a1d5dbc175c86bd192a608",
+        "version" : "24.0.0"
+      }
+    },
+    {
+      "identity" : "libphonenumber-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/iziz/libPhoneNumber-iOS.git",
+      "state" : {
+        "revision" : "a6f5cb0a2a264e8396da65b0fb27ecf0df8a975e",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "pure-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoSite/pure-parser.git",
+      "state" : {
+        "revision" : "9024ccc1a2675d4b640dd7b81d911b7a8e355d32",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "reachabilityswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/ReachabilitySwift.git",
+      "state" : {
+        "revision" : "69f2ad4e971b73e2e06b5069cdf850a41ae25aae",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "swiftdate",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/malcommac/SwiftDate.git",
+      "state" : {
+        "revision" : "5d943224c3bb173e6ecf27295611615eba90c80e",
+        "version" : "7.0.0"
+      }
+    },
+    {
+      "identity" : "swiftmime",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/SwiftMime.git",
+      "state" : {
+        "revision" : "7e324a1505450c27bef6f5b1f6fa36b0bfb0839f",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swiftynsexception",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JivoChat/SwiftyNSException.git",
+      "state" : {
+        "revision" : "0eabfa3ec9727eb66ad738216892e89b87ea661c",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "typedtextattributes",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FluidGroup/TypedTextAttributes.git",
+      "state" : {
+        "revision" : "66cee4641c156f496c284e83556c39dc91dc90a8",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "xcglogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DaveWoodCom/XCGLogger.git",
+      "state" : {
+        "revision" : "4def3c1c772ca90ad5e7bfc8ac437c3b0b4276cf",
+        "version" : "7.1.5"
+      }
+    }
+  ],
+  "version" : 2
+}

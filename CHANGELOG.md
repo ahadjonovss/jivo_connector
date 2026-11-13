@@ -1,3 +1,9 @@
+## 0.7.1
+
+* Swift Package Manager support on iOS, next to CocoaPods. Through SPM the
+  plugin needs iOS 15, as JivoSDK's own package does.
+* An example app: the chat behind a button, with the unread dot.
+
 ## 0.7.0
 
 * `JivoAppearance.showOperatorInTitle`: `false` keeps `title` in the chat
